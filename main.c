@@ -181,7 +181,7 @@ int check(char matr[][8],int row_s,int col_s,int row,int col,char word[],int len
             k++;
             col++;
         }
-        else if (cross='c'){
+        else if (cross=='c'){
             k++;
             row++;
         }
