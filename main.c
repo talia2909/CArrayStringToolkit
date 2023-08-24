@@ -2,32 +2,36 @@
 //histogramArray(int *arr, int size);
 //printMaxPartAscending(int *arr2, int size2);
 //checkSaddleElement(int arr[][10],int row_s,int col_s);
-rotateMatrix90(int arr[][3], int row_s,int col_s);
-void main() {
+//rotateMatrix90(int arr[][3], int row_s,int col_s);
+void rotateString(char myString[], int step, int dirc);
+int main() {
     //int size1=14;
     //int arr1[14]={13, 1, 3, 4, 7, 3, 13, 9, 13, 5, 4, 1, 4, 13};
     //histogramArray(arr1, size1);
     //int arr2[10]={10,9,8,7,6,5,4,3,2,1};
     //int size2=10;
     //printMaxPartAscending(arr2,size2);
-   /* int arr[8][10]={{1, 2, 0, 3, 9, 4, 5, 3, 6, 7},
-                    {2 ,4 ,3, 5, 9, 0, 2, 3, 4, 1},
-                    {5, 3, 4, 7, 6, 1, 9, 0, 4, 2},
-                    {6, 9, 7, 8, 6, 7, 7, 4, 5, 6},
-                    {8, 3, 1, 9, 2, 0, 6, 2, 8, 2},
-                    {2, 7, 3, 0, 3, 6, 3, 1, 5, 3},
-                    {8, 2, 5, 9, 7, 7, 8, 3, 7, 3},
-                    {1, 7, 4, 8, 5, 8, 5, 0, 0, 6}};*/
-     int row_s=3, col_s=3;
-     //ans=checkSaddleElement(arr,row_s,col_s);
-     int arr[3][3]={{1,2,3},{4,5,6},{7,8,9}};
-     rotateMatrix90(arr,row_s,col_s);
-    for (int i = 0; i <row_s; i++){
-        for(int j=0;j<col_s;j++){
-            printf("%d ",arr[i][j]);
-        }
-        printf("\n");
-    }}
+    /* int arr[8][10]={{1, 2, 0, 3, 9, 4, 5, 3, 6, 7},
+                     {2 ,4 ,3, 5, 9, 0, 2, 3, 4, 1},
+                     {5, 3, 4, 7, 6, 1, 9, 0, 4, 2},
+                     {6, 9, 7, 8, 6, 7, 7, 4, 5, 6},
+                     {8, 3, 1, 9, 2, 0, 6, 2, 8, 2},
+                     {2, 7, 3, 0, 3, 6, 3, 1, 5, 3},
+                     {8, 2, 5, 9, 7, 7, 8, 3, 7, 3},
+                     {1, 7, 4, 8, 5, 8, 5, 0, 0, 6}};*/
+    //int row_s=3, col_s=3;
+    //ans=checkSaddleElement(arr,row_s,col_s);
+    //int arr[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+    //rotateMatrix90(arr,row_s,col_s);
+    //for (int i = 0; i <row_s; i++){
+    //for(int j=0;j<col_s;j++){
+    //printf("%d ",arr[i][j]);
+    // }
+    char str[] = "refdeeae";
+    rotateString(str, 10, 1);  // Rotate right by 2 steps
+    printf("%s\n", str);      // Output: "efabcd"
+    return 0;
+}
 int histogramArray(int *arr, int size){
     int sum[size];
     for (int i = 0; i <= size; i++) {
@@ -108,6 +112,31 @@ int rotateMatrix90(int arr[][3], int row_s,int col_s){
     }
 }
 
-
-
-
+void rotateString(char myString[], int step, int dirc) {
+    int length = 0, step_mod;
+    while (myString[length] != '\0') {
+        length++;
+    }
+    step_mod = step % length;
+    char move[step_mod];
+    for (int i = 0; i < step_mod; i++) {
+        if (dirc == 1) {
+            move[i] = myString[i];
+        } else if (dirc == 2) {
+            move[i] = myString[length - step_mod - i];
+        }}
+        for (int i = 0; i < length - step_mod; i++) {
+            if (dirc == 1) {
+                myString[i] = myString[i + step_mod];
+            } else if (dirc == 2) {
+                myString[length - i - 1] = myString[length - i - 3];
+            }
+        }
+        for (int i = 0; i < step_mod; i++) {
+            if (dirc == 1) {
+                myString[length - step_mod + i] = move[i];
+            } else if (dirc == 2) {
+                myString[i] = move[i];
+            }
+        }
+        }
