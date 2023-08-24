@@ -3,7 +3,10 @@
 //printMaxPartAscending(int *arr2, int size2);
 //checkSaddleElement(int arr[][10],int row_s,int col_s);
 //rotateMatrix90(int arr[][3], int row_s,int col_s);
-void rotateString(char myString[], int step, int dirc);
+//void rotateString(char myString[], int step, int dirc);
+
+int check(char matr[][8], int row_s, int col_s, int row, int col, char word[], int len, char cross);
+int countWords(char matr[][8], int row_s, int col_s, char word[]);
 int main() {
     //int size1=14;
     //int arr1[14]={13, 1, 3, 4, 7, 3, 13, 9, 13, 5, 4, 1, 4, 13};
@@ -27,9 +30,22 @@ int main() {
     //for(int j=0;j<col_s;j++){
     //printf("%d ",arr[i][j]);
     // }
-    char str[] = "refdeeae";
+    /*char str[] = "refdeeae";
     rotateString(str, 10, 1);  // Rotate right by 2 steps
-    printf("%s\n", str);      // Output: "efabcd"
+    printf("%s\n", str);      // Output: "fdeeaere"
+*/
+    char matrix[][8] = {
+            {'a', 'w', 'o', 'r', 'd', 'b', 'c', 'w'},
+            {'d', 'o', 'o', 'e', 'f', 'h', 'i', 'o'},
+            {'j', 'r', 'k', 'r', 'w', 'l', 'w', 'r'},
+            {'m', 'd', 'n', 'o', 'd', 'o', 'o', 'd'},
+            {'p', 'q', 'r', 's', 'w', 'o', 'r', 'd'},
+            {'t', 'u', 'v', 'w', 'x', 'y', 'd', 'd'}
+    };
+    int row_s=6, col_s=8,counter;
+    char word[]="word";
+    counter=countWords(matrix,row_s,col_s,word);
+    printf("%d",counter);
     return 0;
 }
 int histogramArray(int *arr, int size){
@@ -140,3 +156,44 @@ void rotateString(char myString[], int step, int dirc) {
             }
         }
         }
+int countWords(char matr[][8],int row_s,int col_s,char word[]) {
+    int length=0, k = 0, flag = 0;
+    while (word[length] != '\0') {
+        length++;
+    }
+    for (int i = 0; i < row_s; i++) {
+        for (int j = 0; j < col_s; j++) {
+            if (matr[i][j] == word[k]) {
+                flag=flag+check(matr,row_s,col_s,i,j+1,word,length,'r');
+                flag+=check(matr,row_s,col_s,i+1,j,word,length,'c');
+                flag+=check(matr,row_s,col_s,i+1,j+1,word,length,'x');
+            }
+            k = 0;
+        }
+
+    }
+    return flag;
+}
+int check(char matr[][8],int row_s,int col_s,int row,int col,char word[],int len,char cross) {
+    int k = 1, c = 0;
+    while (matr[row][col] == word[k]) { // {
+        if (cross == 'r') {
+            k++;
+            col++;
+        }
+        else if (cross='c'){
+            k++;
+            row++;
+        }
+        else if (cross == 'x') {
+            k++;
+            col++;
+            row++;
+        }
+        if (word[k] == '\0') {
+            c++;
+            break;
+        }
+    }
+    return c;
+}
