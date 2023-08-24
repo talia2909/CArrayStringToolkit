@@ -4,9 +4,9 @@
 //checkSaddleElement(int arr[][10],int row_s,int col_s);
 //rotateMatrix90(int arr[][3], int row_s,int col_s);
 //void rotateString(char myString[], int step, int dirc);
-
 int check(char matr[][8], int row_s, int col_s, int row, int col, char word[], int len, char cross);
 int countWords(char matr[][8], int row_s, int col_s, char word[]);
+void decipher(char seq[]);
 int main() {
     //int size1=14;
     //int arr1[14]={13, 1, 3, 4, 7, 3, 13, 9, 13, 5, 4, 1, 4, 13};
@@ -33,7 +33,7 @@ int main() {
     /*char str[] = "refdeeae";
     rotateString(str, 10, 1);  // Rotate right by 2 steps
     printf("%s\n", str);      // Output: "fdeeaere"
-*/
+
     char matrix[][8] = {
             {'a', 'w', 'o', 'r', 'd', 'b', 'c', 'w'},
             {'d', 'o', 'o', 'e', 'f', 'h', 'i', 'o'},
@@ -46,6 +46,10 @@ int main() {
     char word[]="word";
     counter=countWords(matrix,row_s,col_s,word);
     printf("%d",counter);
+     */
+    char seq[]="Btwlzx Dqqes Eq|pj4 Tjhvqujs Iqoqjy bpg Eqfxtx Xcwwtt5";
+    decipher(seq);
+    printf("Deciphered: %s\n", seq);
     return 0;
 }
 int histogramArray(int *arr, int size){
@@ -164,7 +168,7 @@ int countWords(char matr[][8],int row_s,int col_s,char word[]) {
     for (int i = 0; i < row_s; i++) {
         for (int j = 0; j < col_s; j++) {
             if (matr[i][j] == word[k]) {
-                flag=flag+check(matr,row_s,col_s,i,j+1,word,length,'r');
+                flag+=check(matr,row_s,col_s,i,j+1,word,length,'r');
                 flag+=check(matr,row_s,col_s,i+1,j,word,length,'c');
                 flag+=check(matr,row_s,col_s,i+1,j+1,word,length,'x');
             }
@@ -196,4 +200,19 @@ int check(char matr[][8],int row_s,int col_s,int row,int col,char word[],int len
         }
     }
     return c;
+}
+void decipher(char seq[]){
+    int len=0,k,i=1;
+    while(seq[len]!='\0'){
+        if (seq[len]==' '){
+            len++;
+            i=1;
+        } else {
+            k=seq[len];
+            seq[len]=(char)(k-i);
+            i++;
+            len++;
+        }
+
+    }
 }
